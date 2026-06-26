@@ -1,0 +1,443 @@
+
+
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,div,span,p,label,button,input{font-family:'Poppins',-apple-system,sans-serif}
+.app{max-width:920px;margin:0 auto;padding:1.5rem 0 1rem}
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.9rem;border-bottom:2.5px solid #FFD932}
+.hdr-logo{display:flex;flex-direction:column;gap:4px}
+.hdr-logo svg{width:140px;height:auto;fill:currentColor}
+.hdr-sub{font-size:10px;color:var(--color-text-secondary)}
+.toggle{display:flex;background:var(--color-background-secondary);border-radius:8px;padding:3px;gap:3px}
+.tbtn{font-size:11px;font-weight:500;padding:5px 14px;border-radius:6px;border:none;background:transparent;color:var(--color-text-secondary);cursor:pointer;font-family:'Poppins',sans-serif;transition:.2s}
+.tbtn.on{background:#07A0C3;color:#fff}
+.cols{display:grid;grid-template-columns:245px 1fr;gap:16px;align-items:start;margin-bottom:14px}
+.left{display:flex;flex-direction:column;gap:9px}
+.pnl{background:var(--color-background-secondary);border-radius:12px;padding:12px 14px}
+.ptitle{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:10px}
+.fund-row{margin-bottom:12px}.fund-row:last-child{margin-bottom:0}
+.fmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.finfo{display:flex;align-items:center;gap:7px}
+.fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fname{font-size:11px;font-weight:500;color:var(--color-text-primary)}
+.fisin{font-size:9px;color:var(--color-text-secondary);font-family:monospace;margin-left:15px;margin-bottom:3px}
+.fpct{font-size:13px;font-weight:600}
+.autobar{height:4px;background:var(--color-background-primary);border-radius:2px;margin-top:5px}
+.autoinner{height:100%;border-radius:2px;transition:width .3s}
+.autonote{font-size:9px;color:var(--color-text-secondary);margin-top:2px}
+input[type=range]{width:100%;cursor:pointer;accent-color:#07A0C3}
+.hrow{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.hval{font-size:22px;font-weight:600;color:#07A0C3;min-width:48px;line-height:1}
+.hsub{font-size:10px;color:var(--color-text-secondary)}
+.rlbls{display:flex;justify-content:space-between;font-size:9px;color:var(--color-text-secondary);margin-top:2px}
+.amt-wrap{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.amt-in{flex:1;border:none;border-bottom:2px solid #07A0C3;background:transparent;font-size:18px;font-weight:600;color:#07A0C3;font-family:'Poppins',sans-serif;text-align:right;padding:2px 0;outline:none;-moz-appearance:textfield}
+.amt-in::-webkit-inner-spin-button,.amt-in::-webkit-outer-spin-button{-webkit-appearance:none}
+.amt-unit{font-size:11px;color:var(--color-text-secondary);font-weight:500}
+.amt-fmt{font-size:10px;color:var(--color-text-secondary);text-align:right}
+.fdgrid{display:grid;grid-template-columns:1fr auto auto;gap:2px 8px;font-size:10px}
+.fdh{font-weight:600;color:var(--color-text-secondary);font-size:9px;text-transform:uppercase;letter-spacing:.04em;padding-bottom:3px;border-bottom:1px solid var(--color-border-tertiary)}
+.fdv{color:var(--color-text-primary);font-weight:500;text-align:right}
+.fdn{color:var(--color-text-secondary)}
+.right{display:flex;flex-direction:column;gap:11px}
+.srow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sc{background:var(--color-background-secondary);border-radius:10px;padding:11px 13px}
+.sc.hi{background:rgba(7,160,195,0.1);border:1px solid rgba(7,160,195,0.2)}
+.sl{font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:3px}
+.sn{font-size:22px;font-weight:600;color:var(--color-text-primary);line-height:1.1}
+.sc.hi .sn{color:#07A0C3}
+.snote{font-size:9px;color:var(--color-text-secondary);margin-top:2px}
+.probpnl,.mer-pnl,.chpnl,.hppnl{background:var(--color-background-secondary);border-radius:12px;padding:13px 15px}
+.probtitle{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:11px}
+.pi{display:grid;grid-template-columns:1fr auto;align-items:start;gap:10px;margin-bottom:13px}
+.pi:last-child{margin-bottom:0}
+.ph{display:flex;align-items:baseline;gap:3px;font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:4px}
+.ti{width:38px;border:none;border-bottom:1.5px solid rgba(7,160,195,0.6);background:transparent;font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:'Poppins',sans-serif;text-align:center;padding:0 1px 1px;outline:none;-moz-appearance:textfield}
+.ti::-webkit-inner-spin-button,.ti::-webkit-outer-spin-button{-webkit-appearance:none}
+.ti:focus{border-bottom-color:#07A0C3}
+.ptrack{height:6px;background:var(--color-background-primary);border-radius:3px;overflow:hidden;margin-bottom:3px}
+.pfill{height:100%;border-radius:3px;transition:width .4s}
+.pctx{font-size:9px;color:var(--color-text-secondary)}
+.pnum{font-size:25px;font-weight:600;text-align:right;line-height:1}
+.mer-header{display:flex;align-items:baseline;gap:6px;margin-bottom:11px}
+.mer-title{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-secondary)}
+.mer-thresh{font-size:9px;color:var(--color-text-secondary)}
+.mer-grid{display:grid;grid-template-columns:1fr 32px 1fr;align-items:center;gap:8px;margin-bottom:11px}
+.mbox{background:var(--color-background-primary);border-radius:9px;padding:10px 12px}
+.mbox.blue{background:rgba(7,160,195,0.08);border:1px solid rgba(7,160,195,0.2)}
+.mbox-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-secondary);margin-bottom:4px}
+.mbox-val{font-size:17px;font-weight:600;color:var(--color-text-primary);line-height:1.1}
+.mbox.blue .mbox-val{color:#07A0C3}
+.mbox-sub{font-size:9px;color:var(--color-text-secondary);margin-top:2px}
+.mer-vs{font-size:11px;color:var(--color-text-secondary);text-align:center;font-weight:500}
+.mer-result{display:flex;align-items:center;justify-content:space-between;background:rgba(255,217,50,0.14);border:1px solid rgba(230,184,0,0.35);border-radius:9px;padding:10px 14px}
+.mer-result-lbl{font-size:11px;font-weight:500;color:var(--color-text-primary)}
+.mer-result-sub{font-size:9px;color:var(--color-text-secondary);margin-top:1px}
+.mer-result-val{font-size:22px;font-weight:600;color:#9a7000;text-align:right}
+.mer-result-pct{font-size:10px;color:var(--color-text-secondary);text-align:right;margin-top:1px}
+.chlbl{font-size:11px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px}
+.chsub{font-size:10px;color:var(--color-text-secondary);margin-bottom:11px}
+.chwrap{position:relative;width:100%;height:130px}
+.hpwrap{position:relative;width:100%;height:220px}
+.leg{display:flex;flex-wrap:wrap;gap:12px;margin-top:7px;font-size:9px;color:var(--color-text-secondary)}
+.li{display:flex;align-items:center;gap:5px}
+.ld{width:14px;height:2px;display:inline-block;border-radius:1px}
+.pctrow{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}
+.pb{background:var(--color-background-primary);border-radius:7px;padding:7px 5px;text-align:center}
+.pb.mid{background:rgba(7,160,195,0.1);border:1px solid rgba(7,160,195,0.25)}
+.pbl{font-size:8px;color:var(--color-text-secondary);margin-bottom:2px;line-height:1.3}
+.pbv{font-size:12px;font-weight:600;color:var(--color-text-primary)}
+.pb.mid .pbv{color:#07A0C3}
+.note{font-size:9px;color:var(--color-text-secondary);line-height:1.6;padding:8px 12px;background:var(--color-background-secondary);border-radius:8px;border-left:3px solid #FFD932}
+.badge{display:inline-block;font-size:8px;font-weight:600;background:rgba(7,160,195,0.12);color:#07A0C3;border:1px solid rgba(7,160,195,0.25);border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle;letter-spacing:.04em}
+.hp-leg{display:flex;gap:14px;margin-top:8px;font-size:9px;color:var(--color-text-secondary)}
+.hp-swatch{width:12px;height:10px;display:inline-block;border-radius:2px;margin-right:4px;vertical-align:middle}
+</style>
+
+<div class="app">
+  <div class="hdr">
+    <div class="hdr-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550.81 213.02">
+        <g><path d="m57.11,91.57v2.2H20.18v-2.2h11.81V3.71h-11.81c-4.21,0-7.89,2.15-11.05,6.45-3.16,4.3-5.24,10.16-6.25,17.57H0L2.06,3.84c.09-1.56,1.01-2.33,2.75-2.33h67.69c1.74,0,2.65.78,2.75,2.33l2.06,23.89h-2.88c-1.01-7.41-3.09-13.27-6.25-17.57-3.16-4.3-6.84-6.45-11.05-6.45h-11.81v87.87h11.81Z"/><path d="m111.75,3.71v87.87h11.81v2.2h-36.93v-2.2h11.81V3.71h-11.81V1.51h36.93v2.2h-11.81Z"/><path d="m159.12,91.57h22.1c3.2,0,5.86-.55,7.96-1.65,2.1-1.1,3.84-2.68,5.22-4.74,1.37-2.06,2.47-4.51,3.29-7.34.82-2.84,1.6-5.99,2.33-9.47.36-1.92.87-2.88,1.51-2.88.73,0,1.1,1.1,1.1,3.29v20.59c0,2.93-1.33,4.39-3.98,4.39h-64.53v-2.2h11.67V3.71h-11.81V1.51h61.37c2.29,0,3.43,1.1,3.43,3.3v20.87c0,1.19-.32,1.79-.96,1.79-.73,0-1.1-.64-1.1-1.92-.09-2.01-.44-4.28-1.03-6.8-.6-2.52-1.53-4.9-2.81-7.14-1.28-2.24-2.97-4.12-5.08-5.63s-4.71-2.27-7.83-2.27h-20.87v40.36h10.85c2.01,0,3.61-.3,4.81-.89,1.19-.59,2.13-1.44,2.81-2.54.69-1.1,1.21-2.42,1.58-3.98.36-1.56.73-3.3,1.1-5.22.27-1.28.64-1.92,1.1-1.92.55,0,.82.55.82,1.65v27.87c0,1.19-.27,1.79-.82,1.79-.46,0-.82-.64-1.1-1.92-.37-1.92-.73-3.66-1.1-5.22-.37-1.55-.89-2.88-1.58-3.98-.69-1.1-1.63-1.94-2.81-2.54-1.19-.59-2.79-.89-4.81-.89h-10.85v45.31Z"/><path d="m269.64,91.57v2.2h-36.93v-2.2h11.81V3.71h-11.81c-4.21,0-7.89,2.15-11.05,6.45-3.16,4.3-5.24,10.16-6.25,17.57h-2.88l2.06-23.89c.09-1.56,1.01-2.33,2.75-2.33h67.69c1.74,0,2.65.78,2.75,2.33l2.06,23.89h-2.88c-1.01-7.41-3.09-13.27-6.25-17.57-3.16-4.3-6.84-6.45-11.05-6.45h-11.81v87.87h11.81Z"/><path d="m352.08,2.06c3.8,1.37,7.02,3.25,9.68,5.63l5.9-5.9c.36-.36.66-.64.89-.82.23-.18.57-.27,1.03-.27.73,0,1.1.5,1.1,1.51v25.95c0,.82-.28,1.24-.82,1.24s-.96-.41-1.24-1.24c-2.93-9.34-6.77-15.95-11.53-19.84-4.76-3.89-10.48-5.84-17.16-5.84-3.75,0-7.16.71-10.23,2.13-3.07,1.42-5.72,3.62-7.96,6.59-2.24,2.97-3.98,6.8-5.22,11.46s-1.85,10.25-1.85,16.75v16.89c0,12.45,2.2,21.83,6.59,28.15s10.57,9.47,18.53,9.47c3.75,0,6.8-.57,9.13-1.72,2.33-1.14,4.14-2.61,5.42-4.39,1.28-1.78,2.15-3.78,2.61-5.97.46-2.2.69-4.39.69-6.59v-12.91h-14.69v-2.2h40.78v2.2h-11.94v4.67c0,5.13-.85,9.54-2.54,13.25-1.69,3.71-4.03,6.75-7,9.13-2.97,2.38-6.41,4.14-10.3,5.29-3.89,1.14-8.03,1.72-12.42,1.72-5.49,0-10.76-1.28-15.79-3.84-5.03-2.56-9.47-6.04-13.32-10.43s-6.91-9.52-9.2-15.38c-2.29-5.86-3.43-12.03-3.43-18.53s1.12-12.68,3.36-18.53c2.24-5.86,5.26-10.98,9.06-15.38,3.8-4.39,8.26-7.87,13.39-10.43,5.13-2.56,10.57-3.84,16.34-3.84,4.3,0,8.35.69,12.15,2.06Z"/><path d="m414.34,91.57h22.1c3.2,0,5.86-.55,7.96-1.65,2.1-1.1,3.84-2.68,5.22-4.74,1.37-2.06,2.47-4.51,3.29-7.34.82-2.84,1.6-5.99,2.33-9.47.36-1.92.87-2.88,1.51-2.88.73,0,1.1,1.1,1.1,3.29v20.59c0,2.93-1.33,4.39-3.98,4.39h-64.53v-2.2h11.67V3.71h-11.81V1.51h61.37c2.29,0,3.43,1.1,3.43,3.3v20.87c0,1.19-.32,1.79-.96,1.79-.73,0-1.1-.64-1.1-1.92-.09-2.01-.44-4.28-1.03-6.8-.6-2.52-1.53-4.9-2.81-7.14-1.28-2.24-2.97-4.12-5.08-5.63s-4.71-2.27-7.83-2.27h-20.87v40.36h10.85c2.01,0,3.61-.3,4.81-.89,1.19-.59,2.13-1.44,2.81-2.54.69-1.1,1.21-2.42,1.58-3.98.36-1.56.73-3.3,1.1-5.22.27-1.28.64-1.92,1.1-1.92.55,0,.82.55.82,1.65v27.87c0,1.19-.27,1.79-.82,1.79-.46,0-.82-.64-1.1-1.92-.37-1.92-.73-3.66-1.1-5.22-.37-1.55-.89-2.88-1.58-3.98-.69-1.1-1.63-1.94-2.81-2.54-1.19-.59-2.79-.89-4.81-.89h-10.85v45.31Z"/><path d="m479.01,91.57V3.71h-11.81V1.51h27.05l42.56,69.61V3.71h-11.81V1.51h25.81v2.2h-11.81v91.16h-4.67L481.2,7.69v83.89h11.81v2.2h-25.81v-2.2h11.81Z"/></g>
+        <g><path d="m55.93,119.94c3.52,1.19,6.52,2.88,8.99,5.08s4.37,4.83,5.7,7.89c1.33,3.07,1.99,6.43,1.99,10.09s-.67,7.16-1.99,10.23c-1.33,3.07-3.18,5.7-5.56,7.89-2.38,2.2-5.24,3.89-8.58,5.08-3.34,1.19-7.03,1.78-11.05,1.78h-14.28v40.23h11.81v2.2H6.02v-2.2h11.81v-87.87H6.02v-2.2h38.03c4.39,0,8.35.6,11.88,1.79Zm-10.5,45.86c4.3,0,7.87-1.62,10.71-4.87,2.84-3.25,4.26-8.4,4.26-15.45v-4.94c0-7.32-1.44-12.51-4.32-15.58-2.88-3.07-6.89-4.6-12.01-4.6h-12.91v45.44h14.28Z"/><path d="m106.11,208.22h22.1c3.2,0,5.86-.55,7.96-1.65,2.1-1.1,3.84-2.68,5.22-4.74,1.37-2.06,2.47-4.51,3.29-7.34.82-2.84,1.6-5.99,2.33-9.47.36-1.92.87-2.88,1.51-2.88.73,0,1.1,1.1,1.1,3.29v20.59c0,2.93-1.33,4.39-3.98,4.39h-64.53v-2.2h11.67v-87.87h-11.81v-2.2h61.37c2.29,0,3.43,1.1,3.43,3.3v20.87c0,1.19-.32,1.79-.96,1.79-.73,0-1.1-.64-1.1-1.92-.09-2.01-.44-4.28-1.03-6.8-.6-2.52-1.53-4.9-2.81-7.14-1.28-2.24-2.97-4.12-5.08-5.63s-4.71-2.27-7.83-2.27h-20.87v40.36h10.85c2.01,0,3.61-.3,4.81-.89,1.19-.59,2.13-1.44,2.81-2.54.69-1.1,1.21-2.42,1.58-3.98.36-1.56.73-3.3,1.1-5.22.27-1.28.64-1.92,1.1-1.92.55,0,.82.55.82,1.65v27.87c0,1.19-.27,1.79-.82,1.79-.46,0-.82-.64-1.1-1.92-.37-1.92-.73-3.66-1.1-5.22-.37-1.55-.89-2.88-1.58-3.98-.69-1.1-1.63-1.94-2.81-2.54-1.19-.59-2.79-.89-4.81-.89h-10.85v45.31Z"/><path d="m170.77,208.22v-87.87h-11.81v-2.2h27.05l42.56,69.61v-67.41h-11.81v-2.2h25.81v2.2h-11.81v91.16h-4.67l-53.13-87.18v83.89h11.81v2.2h-25.81v-2.2h11.81Z"/><path d="m308.89,116.09c.55,0,.82.46.82,1.37v24.44c0,.92-.32,1.37-.96,1.37-.73,0-1.15-.46-1.24-1.37-.37-2.93-1.12-5.77-2.27-8.51-1.15-2.75-2.68-5.17-4.6-7.28-1.92-2.1-4.3-3.8-7.14-5.08-2.84-1.28-6.13-1.92-9.88-1.92-2.47,0-4.92.34-7.35,1.03-2.43.69-4.58,1.72-6.45,3.09-1.88,1.37-3.41,3.14-4.6,5.29-1.19,2.15-1.78,4.65-1.78,7.48,0,3.02.73,5.68,2.2,7.96,1.46,2.29,3.61,3.98,6.45,5.08,2.56,1.01,4.9,1.85,7,2.54,2.1.69,4.12,1.3,6.04,1.85s3.8,1.05,5.63,1.51c1.83.46,3.8,1.01,5.9,1.65,6.22,1.83,10.78,4.87,13.66,9.13,2.88,4.26,4.32,9.45,4.32,15.58,0,4.49-.8,8.67-2.4,12.56-1.6,3.89-3.78,7.25-6.52,10.09-2.75,2.84-6,5.06-9.75,6.66-3.75,1.6-7.83,2.4-12.22,2.4-2.38,0-4.69-.3-6.93-.89-2.24-.6-4.35-1.35-6.32-2.27-1.97-.91-3.75-1.92-5.35-3.02-1.6-1.1-2.95-2.15-4.05-3.16l-4.94,7.14c-.64.91-1.24,1.37-1.78,1.37-.82,0-1.24-.6-1.24-1.78v-24.58c0-1.28.32-1.92.96-1.92.73,0,1.24.6,1.51,1.79,1.01,3.84,2.45,7.32,4.32,10.43,1.87,3.11,4.1,5.72,6.66,7.83,2.56,2.11,5.35,3.73,8.37,4.87,3.02,1.15,6.18,1.72,9.47,1.72,2.84,0,5.63-.5,8.37-1.51,2.75-1.01,5.17-2.42,7.28-4.26,2.1-1.83,3.8-4.1,5.08-6.8,1.28-2.7,1.92-5.7,1.92-8.99,0-2.65-.55-5.29-1.65-7.89-1.1-2.61-3.2-4.64-6.32-6.11-2.47-1.19-4.65-2.13-6.52-2.81-1.88-.69-3.73-1.33-5.56-1.92-1.83-.59-3.8-1.21-5.9-1.85-2.11-.64-4.67-1.46-7.69-2.47-6.32-2.1-10.96-5.17-13.94-9.2-2.98-4.03-4.46-8.47-4.46-13.32,0-3.57.64-6.95,1.92-10.16,1.28-3.2,3.16-6.04,5.63-8.51,2.47-2.47,5.47-4.44,8.99-5.9,3.52-1.46,7.53-2.2,12.01-2.2,2.2,0,4.14.12,5.83.34,1.69.23,3.3.57,4.81,1.03,1.51.46,3,1.05,4.46,1.78,1.46.73,3.02,1.56,4.67,2.47l3.98-5.08c.55-.73,1.05-1.1,1.51-1.1Z"/><path d="m350.9,120.35v87.87h11.81v2.2h-36.93v-2.2h11.81v-87.87h-11.81v-2.2h36.93v2.2h-11.81Z"/><path d="m400.12,208.97c-5.17-2.7-9.68-6.29-13.52-10.78-3.84-4.48-6.89-9.63-9.13-15.45-2.24-5.81-3.36-11.83-3.36-18.05s1.12-12.24,3.36-18.05c2.24-5.81,5.29-10.94,9.13-15.38,3.84-4.44,8.35-7.98,13.52-10.64,5.17-2.65,10.69-3.98,16.54-3.98s11.37,1.33,16.54,3.98c5.17,2.66,9.68,6.2,13.52,10.64,3.84,4.44,6.89,9.56,9.13,15.38,2.24,5.81,3.36,11.83,3.36,18.05s-1.12,12.24-3.36,18.05c-2.24,5.81-5.29,10.96-9.13,15.45-3.84,4.49-8.35,8.08-13.52,10.78-5.17,2.7-10.69,4.05-16.54,4.05s-11.37-1.35-16.54-4.05Zm5.56-87.8c-3.2,1.37-5.88,3.59-8.03,6.66-2.15,3.07-3.8,7.05-4.94,11.94-1.15,4.9-1.72,10.91-1.72,18.05v13.73c0,13.27,2.2,23.09,6.59,29.45,4.39,6.36,10.75,9.54,19.08,9.54s14.69-3.18,19.08-9.54c4.39-6.36,6.59-16.18,6.59-29.45v-13.73c0-7.32-.57-13.45-1.72-18.4-1.15-4.94-2.79-8.92-4.94-11.94-2.15-3.02-4.83-5.17-8.03-6.45-3.2-1.28-6.86-1.92-10.98-1.92s-7.78.69-10.98,2.06Z"/><path d="m478.99,208.22v-87.87h-11.81v-2.2h27.05l42.56,69.61v-67.41h-11.81v-2.2h25.81v2.2h-11.81v91.16h-4.67l-53.13-87.18v83.89h11.81v2.2h-25.81v-2.2h11.81Z"/></g>
+      </svg>
+      <div class="hdr-sub">Portef&oslash;lje Sandsynlighedsberegner &middot; Log-normal model</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+      <div class="toggle">
+        <button class="tbtn on" id="btnH" onclick="setScenario('hist')">Historisk</button>
+        <button class="tbtn" id="btnC" onclick="setScenario('cons')">Konservativt</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="left">
+      <div class="pnl">
+        <div class="ptitle">Fondsv&aelig;gte</div>
+        <div class="fund-row">
+          <div class="fisin">DK0016023229</div>
+          <div class="fmeta"><div class="finfo"><div class="fdot" style="background:#07A0C3"></div><div class="fname">DI Teknologi Indeks</div></div><div class="fpct" id="lbl1" style="color:#07A0C3">50%</div></div>
+          <input type="range" id="s1" min="0" max="95" step="5" value="50" oninput="onS()">
+        </div>
+        <div class="fund-row">
+          <div class="fisin">IE00BKWQ0G16</div>
+          <div class="fmeta"><div class="finfo"><div class="fdot" style="background:#1E6FAB"></div><div class="fname">SPDR EU Financials</div></div><div class="fpct" id="lbl2" style="color:#1E6FAB">30%</div></div>
+          <input type="range" id="s2" min="0" max="95" step="5" value="30" oninput="onS()">
+        </div>
+        <div class="fund-row" style="margin-bottom:0">
+          <div class="fisin">IE00BK1PV551</div>
+          <div class="fmeta"><div class="finfo"><div class="fdot" style="background:#0E8A7A"></div><div class="fname">Xtrackers MSCI World</div></div><div class="fpct" id="lbl3" style="color:#0E8A7A">20%</div></div>
+          <div class="autobar"><div class="autoinner" id="abar" style="width:20%;background:#0E8A7A"></div></div>
+          <div class="autonote">Resterende v&aelig;gt (automatisk)</div>
+        </div>
+      </div>
+      <div class="pnl">
+        <div class="ptitle">Tidshorisont</div>
+        <div class="hrow">
+          <div><div class="hval" id="lblH">9</div><div class="hsub">&aring;r</div></div>
+          <input type="range" id="sH" min="3" max="20" step="1" value="9" oninput="onH()" style="flex:1">
+        </div>
+        <div class="rlbls"><span>3 &aring;r</span><span>20 &aring;r</span></div>
+      </div>
+      <div class="pnl">
+        <div class="ptitle">Investeringsbel&oslash;b</div>
+        <div class="amt-wrap">
+          <input type="number" class="amt-in" id="amtIn" value="1000000" min="0" step="50000" oninput="onAmt()">
+          <span class="amt-unit">kr.</span>
+        </div>
+        <div class="amt-fmt" id="amtFmt">1.000.000 kr.</div>
+      </div>
+      <div class="pnl">
+        <div class="ptitle">Fondsn&oslash;gletal<span class="badge">10 &Aring;R</span></div>
+        <div class="fdgrid">
+          <div class="fdh">Fond</div><div class="fdh" style="text-align:right">&mu;</div><div class="fdh" style="text-align:right">&sigma;</div>
+          <div class="fdn">DI Teknologi</div><div class="fdv" id="dmu1">24,1%</div><div class="fdv" id="dsig1">20,1%</div>
+          <div class="fdn">EU Financials</div><div class="fdv" id="dmu2">11,7%</div><div class="fdv" id="dsig2">19,9%</div>
+          <div class="fdn">MSCI World</div><div class="fdv" id="dmu3">12,2%</div><div class="fdv" id="dsig3">14,6%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="srow">
+        <div class="sc hi"><div class="sl">Forv. afkast / &aring;r</div><div class="sn" id="oMu">–</div><div class="snote">Aritmetisk, v&aelig;gtet</div></div>
+        <div class="sc"><div class="sl">Volatilitet</div><div class="sn" id="oSig">–</div><div class="snote">Estimeret m. korrelation</div></div>
+        <div class="sc"><div class="sl">Geo. middelafkast</div><div class="sn" id="oGeo">–</div><div class="snote">Efter risikojustering</div></div>
+      </div>
+
+      <div class="probpnl">
+        <div class="probtitle">Sandsynlighed for at overskride afkastm&aring;l</div>
+        <div class="pi">
+          <div><div class="ph"><span>&gt;&nbsp;</span><input class="ti" id="t1" type="number" value="7.5" min="0.1" max="49.9" step="0.5" oninput="onThresh()"><span>&nbsp;% pr. &aring;r</span></div><div class="ptrack"><div class="pfill" id="f1" style="width:0%"></div></div><div class="pctx" id="c1"></div></div>
+          <div class="pnum" id="p1">–</div>
+        </div>
+        <div class="pi">
+          <div><div class="ph"><span>&gt;&nbsp;</span><input class="ti" id="t2" type="number" value="10" min="0.1" max="49.9" step="0.5" oninput="onThresh()"><span>&nbsp;% pr. &aring;r</span></div><div class="ptrack"><div class="pfill" id="f2" style="width:0%"></div></div><div class="pctx" id="c2"></div></div>
+          <div class="pnum" id="p2">–</div>
+        </div>
+        <div class="pi">
+          <div><div class="ph"><span>&gt;&nbsp;</span><input class="ti" id="t3" type="number" value="15" min="0.1" max="49.9" step="0.5" oninput="onThresh()"><span>&nbsp;% pr. &aring;r</span></div><div class="ptrack"><div class="pfill" id="f3" style="width:0%"></div></div><div class="pctx" id="c3"></div></div>
+          <div class="pnum" id="p3">–</div>
+        </div>
+      </div>
+
+      <div class="mer-pnl">
+        <div class="mer-header"><div class="mer-title">Merafkast i kr.</div><div class="mer-thresh" id="merThreshLbl"></div></div>
+        <div class="mer-grid">
+          <div class="mbox blue"><div class="mbox-lbl">P50 Median</div><div class="mbox-val" id="merP50Val">–</div><div class="mbox-sub" id="merP50Sub"></div></div>
+          <div class="mer-vs">vs.</div>
+          <div class="mbox"><div class="mbox-lbl" id="merT1Lbl">m&aring;l</div><div class="mbox-val" id="merT1Val">–</div><div class="mbox-sub" id="merT1Sub"></div></div>
+        </div>
+        <div class="mer-result">
+          <div><div class="mer-result-lbl">Merafkast ved medianudfald</div><div class="mer-result-sub" id="merSub"></div></div>
+          <div><div class="mer-result-val" id="merVal">–</div><div class="mer-result-pct" id="merPct"></div></div>
+        </div>
+      </div>
+
+      <!-- Holding Period Chart -->
+      <div class="hppnl">
+        <div class="chlbl">Afkast og tidsperspektiv</div>
+        <div class="chsub" id="hpSub">Annualiseret afkastspænd for 1–9 &aring;rs horisonter &middot; Valgt horisont fremh&aelig;vet</div>
+        <div class="hpwrap"><canvas id="hpc"></canvas></div>
+        <div class="hp-leg">
+          <span><span class="hp-swatch" style="background:rgba(7,160,195,0.25)"></span>P5–P95 spænd</span>
+          <span><span class="hp-swatch" style="background:rgba(7,160,195,0.55)"></span>P25–P75 (midterste 50%)</span>
+          <span><span class="hp-swatch" style="background:#07A0C3;width:3px;height:10px;border-radius:1px"></span>Median (P50)</span>
+        </div>
+      </div>
+
+      <div class="chpnl">
+        <div class="chlbl">Sandsynlighedsfordeling &mdash; annualiseret afkast</div>
+        <div class="chsub" id="cSub">Over 9 &aring;r</div>
+        <div class="chwrap"><canvas id="dc"></canvas></div>
+        <div class="leg">
+          <span class="li"><span class="ld" style="background:#07A0C3"></span>Fordeling</span>
+          <span class="li"><span class="ld" style="background:#e53935"></span>M&aring;l 1</span>
+          <span class="li"><span class="ld" style="background:#f0a020"></span>M&aring;l 2</span>
+          <span class="li"><span class="ld" style="background:#2e7d32"></span>M&aring;l 3</span>
+        </div>
+        <div class="pctrow">
+          <div class="pb"><div class="pbl">P5 pessimistisk</div><div class="pbv" id="pp5">–</div></div>
+          <div class="pb"><div class="pbl">P25</div><div class="pbv" id="pp25">–</div></div>
+          <div class="pb mid"><div class="pbl">P50 Median</div><div class="pbv" id="pp50">–</div></div>
+          <div class="pb"><div class="pbl">P75</div><div class="pbv" id="pp75">–</div></div>
+          <div class="pb"><div class="pbl">P95 optimistisk</div><div class="pbv" id="pp95">–</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note" id="noteEl"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const F={
+  hist:[{mu:.2406,sig:.2012},{mu:.1170,sig:.1985},{mu:.1217,sig:.1460}],
+  cons:[{mu:.13,sig:.2012},{mu:.08,sig:.1985},{mu:.07,sig:.1460}]
+};
+const RHO=[[1,.45,.80],[.45,1,.70],[.80,.70,1]];
+let sc='hist',T=9,W=[.50,.30,.20],amount=1000000,thresholds=[.075,.10,.15];
+
+function normCDF(z){const t=1/(1+.2316419*Math.abs(z));const d=.3989422*Math.exp(-.5*z*z);const p=d*t*(.3193815+t*(-.3565638+t*(1.7814779+t*(-1.8212560+t*1.3302744))));return z>=0?1-p:p;}
+function normPPF(p){
+  const a=[-3.969683028665376e1,2.209460984245205e2,-2.759285104469687e2,1.383577518672690e2,-3.066479806614716e1,2.506628277459239];
+  const b=[-5.447609879822406e1,1.615858368580409e2,-1.556989798598866e2,6.680131188771972e1,-1.328068155288572e1];
+  const c=[-7.784894002430293e-3,-3.223964580411365e-1,-2.400758277161838,-2.549732539343734,4.374664141464968,2.938163982698783];
+  const d=[7.784695709041462e-3,3.224671290700398e-1,2.445134137142996,3.754408661907416];
+  const pl=.02425,ph=1-pl;let q,r;
+  if(p<pl){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  if(p<=ph){q=p-.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+  q=Math.sqrt(-2*Math.log(1-p));return-((((( c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+}
+function normPDF(x,mu,s){return Math.exp(-.5*((x-mu)/s)**2)/(s*Math.sqrt(2*Math.PI))}
+function fmt(v){return(v*100).toFixed(1)+'%'}
+function fmtDKK(v){const s=v<0?'-':'+';return s+Math.round(Math.abs(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kr.'}
+function fmtDKKabs(v){return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kr.'}
+function getColor(p){return p>=.9?'#07A0C3':p>=.75?'#e6b800':'#f0a020'}
+
+function compute(){
+  const f=F[sc],w=W;
+  const mu_p=w[0]*f[0].mu+w[1]*f[1].mu+w[2]*f[2].mu;
+  let vp=0;for(let i=0;i<3;i++)for(let j=0;j<3;j++)vp+=w[i]*w[j]*RHO[i][j]*f[i].sig*f[j].sig;
+  const sp=Math.sqrt(vp),mu_ln=mu_p-sp*sp/2;
+  return{mu_p,sp,mu_ln,mu_T:T*mu_ln,sig_T:sp*Math.sqrt(T)};
+}
+
+function update(){
+  const{mu_p,sp,mu_ln,mu_T,sig_T}=compute();
+  document.getElementById('oMu').textContent=fmt(mu_p);
+  document.getElementById('oSig').textContent=fmt(sp);
+  document.getElementById('oGeo').textContent=fmt(mu_ln);
+  document.getElementById('cSub').textContent='Over '+T+' år';
+  document.getElementById('hpSub').textContent='Annualiseret afkastspænd for 1–'+T+' års horisonter · Valgt horisont fremhævet';
+
+  thresholds.forEach((t,i)=>{
+    const z=(T*Math.log(1+t)-mu_T)/sig_T,prob=1-normCDF(z),cum=Math.round(((1+t)**T-1)*100),col=getColor(prob);
+    document.getElementById('f'+(i+1)).style.width=Math.max(1,Math.min(100,prob*100))+'%';
+    document.getElementById('f'+(i+1)).style.background=col;
+    const pEl=document.getElementById('p'+(i+1));pEl.textContent=(prob*100).toFixed(1)+'%';pEl.style.color=col;
+    document.getElementById('c'+(i+1)).textContent='Samlet afkast > '+cum+'% over '+T+' år';
+  });
+
+  [['pp5',.05],['pp25',.25],['pp50',.50],['pp75',.75],['pp95',.95]].forEach(([id,p])=>{
+    document.getElementById(id).textContent=fmt(Math.exp((normPPF(p)*sig_T+mu_T)/T)-1);
+  });
+
+  const p50Total=amount*Math.exp(mu_T),p50Ann=Math.exp(mu_T/T)-1;
+  const t1=thresholds[0],t1Total=amount*Math.pow(1+t1,T),mer=p50Total-t1Total;
+  document.getElementById('merThreshLbl').textContent='— P50 kontra minimumsmål ('+(t1*100).toFixed(1)+'%)';
+  document.getElementById('merP50Val').textContent=fmtDKKabs(p50Total);
+  document.getElementById('merP50Sub').textContent='Afkast: '+fmt(p50Ann)+' / år · Profit: '+fmtDKK(p50Total-amount);
+  document.getElementById('merT1Lbl').textContent=(t1*100).toFixed(1)+'% mål';
+  document.getElementById('merT1Val').textContent=fmtDKKabs(t1Total);
+  document.getElementById('merT1Sub').textContent='Afkast: '+fmt(t1)+' / år · Profit: '+fmtDKK(t1Total-amount);
+  document.getElementById('merVal').textContent=fmtDKK(mer);
+  document.getElementById('merSub').textContent='Hvad P50 giver ud over minimumsmålet over '+T+' år';
+  document.getElementById('merPct').textContent=mer>0?'P50 giver '+(mer/t1Total).toFixed(1)+'x mere end målet':'Mål overstiger median';
+
+  updateHPChart(mu_ln,sp);
+  updateDistChart(mu_T,sig_T);
+}
+
+// ---- Holding Period Chart ----
+let hpChart=null;
+function hpPercentile(p,mu_ln,sp,t){
+  return Math.exp(mu_ln+normPPF(p)*sp/Math.sqrt(t))-1;
+}
+
+function updateHPChart(mu_ln,sp){
+  const isDark=matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc=isDark?'rgba(255,255,255,.5)':'rgba(0,0,0,.38)';
+  const gc=isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)';
+  const zeroC=isDark?'rgba(255,255,255,.2)':'rgba(0,0,0,.15)';
+
+  const labels=[],d95=[],d75=[],d25=[],d5=[],dMed=[],bgOuter=[],bgInner=[];
+  for(let t=1;t<=T;t++){
+    labels.push(t+' år');
+    const isT=(t===T);
+    const p5=hpPercentile(.05,mu_ln,sp,t);
+    const p25=hpPercentile(.25,mu_ln,sp,t);
+    const p50=Math.exp(mu_ln)-1;
+    const p75=hpPercentile(.75,mu_ln,sp,t);
+    const p95=hpPercentile(.95,mu_ln,sp,t);
+    d5.push([p5,p95]);
+    d25.push([p25,p75]);
+    dMed.push(p50);
+    bgOuter.push(isT?'rgba(7,160,195,0.22)':'rgba(120,140,160,0.13)');
+    bgInner.push(isT?'rgba(7,160,195,0.50)':'rgba(80,110,140,0.28)');
+  }
+
+  const medDots=dMed.map((v,i)=>({x:i,y:v}));
+
+  const datasets=[
+    {label:'P5–P95',data:d5,backgroundColor:bgOuter,borderColor:'transparent',borderWidth:0,barPercentage:.65,categoryPercentage:.8},
+    {label:'P25–P75',data:d25,backgroundColor:bgInner,borderColor:'transparent',borderWidth:0,barPercentage:.65,categoryPercentage:.8},
+    {label:'Median',data:dMed,type:'scatter',pointStyle:'line',pointRadius:9,pointBorderWidth:2.5,pointBorderColor:dMed.map((_,i)=>(i+1===T)?'#07A0C3':'rgba(80,110,140,0.7)'),pointBackgroundColor:'transparent',order:-1}
+  ];
+
+  if(!hpChart){
+    hpChart=new Chart(document.getElementById('hpc'),{
+      type:'bar',
+      data:{labels,datasets},
+      options:{
+        responsive:true,maintainAspectRatio:false,animation:{duration:250},
+        plugins:{legend:{display:false},tooltip:{
+          callbacks:{
+            title:ctx=>ctx[0].label,
+            label:ctx=>{
+              if(ctx.datasetIndex===2)return ' Median: '+fmt(ctx.raw);
+              const[lo,hi]=ctx.raw;
+              return ctx.datasetIndex===0?' P5–P95: '+fmt(lo)+' → '+fmt(hi):' P25–P75: '+fmt(lo)+' → '+fmt(hi);
+            }
+          }
+        }},
+        scales:{
+          x:{ticks:{color:tc,font:{family:'Poppins',size:9}},grid:{color:gc},border:{display:false}},
+          y:{ticks:{color:tc,font:{family:'Poppins',size:9},callback:v=>(v*100).toFixed(0)+'%'},grid:{color:gc},border:{display:false},
+             afterDataLimits(scale){scale.min=Math.min(scale.min,-.05);scale.max=Math.max(scale.max,.05)}}
+        }
+      },
+      plugins:[{id:'zero',afterDatasetsDraw(ch){
+        const{ctx,scales:{x,y}}=ch;const yZ=y.getPixelForValue(0);
+        ctx.save();ctx.strokeStyle=zeroC;ctx.lineWidth=1;ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.moveTo(x.left,yZ);ctx.lineTo(x.right,yZ);ctx.stroke();ctx.restore();
+      }}]
+    });
+  }else{
+    hpChart.data.labels=labels;
+    hpChart.data.datasets[0].data=d5;
+    hpChart.data.datasets[0].backgroundColor=bgOuter;
+    hpChart.data.datasets[1].data=d25;
+    hpChart.data.datasets[1].backgroundColor=bgInner;
+    hpChart.data.datasets[2].data=dMed;
+    hpChart.data.datasets[2].pointBorderColor=dMed.map((_,i)=>(i+1===T)?'#07A0C3':'rgba(80,110,140,0.7)');
+    hpChart.update('none');
+  }
+}
+
+// ---- Distribution Chart ----
+let distChart=null;
+function updateDistChart(mu_T,sig_T){
+  const xs=[],ys=[],lbls=[];
+  for(let r=-.25;r<=.70;r+=.003){
+    const lr=T*Math.log(1+Math.max(r,-.999));
+    ys.push(+(normPDF(lr,mu_T,sig_T)*Math.abs(T/(1+Math.max(r,-.999)))).toFixed(5));
+    xs.push(r);lbls.push((r*100).toFixed(0)+'%');
+  }
+  const isDark=matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc=isDark?'rgba(255,255,255,.5)':'rgba(0,0,0,.38)';
+  const gc=isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)';
+  const vC=['#e53935','#f0a020','#2e7d32'];
+  if(!distChart){
+    distChart=new Chart(document.getElementById('dc'),{
+      type:'line',
+      data:{labels:lbls,datasets:[{data:ys,borderColor:'#07A0C3',backgroundColor:'rgba(7,160,195,.1)',fill:true,pointRadius:0,borderWidth:2,tension:.4}]},
+      options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+        plugins:{legend:{display:false},tooltip:{enabled:false}},
+        scales:{x:{ticks:{maxTicksLimit:9,color:tc,font:{family:'Poppins',size:9},autoSkip:true},grid:{color:gc},border:{display:false}},y:{display:false}}},
+      plugins:[{id:'vl',afterDatasetsDraw(ch){
+        const{ctx,scales:{x,y}}=ch;
+        thresholds.forEach((t,i)=>{const idx=xs.findIndex(r=>r>=t);if(idx<0)return;
+          const px=x.getPixelForValue(idx);ctx.save();ctx.setLineDash([4,3]);ctx.strokeStyle=vC[i];ctx.lineWidth=1.5;
+          ctx.beginPath();ctx.moveTo(px,y.top);ctx.lineTo(px,y.bottom);ctx.stroke();ctx.restore();});
+      }}]
+    });
+  }else{distChart.data.labels=lbls;distChart.data.datasets[0].data=ys;distChart.update('none');}
+}
+
+function onS(){
+  let v1=+document.getElementById('s1').value,v2=+document.getElementById('s2').value;
+  if(v1+v2>100)v2=Math.max(0,100-v1),document.getElementById('s2').value=v2;
+  const v3=Math.max(0,100-v1-v2);W=[v1/100,v2/100,v3/100];
+  document.getElementById('lbl1').textContent=v1+'%';document.getElementById('lbl2').textContent=v2+'%';document.getElementById('lbl3').textContent=v3+'%';
+  const ab=document.getElementById('abar');ab.style.width=v3+'%';ab.style.background=v3>0?'#0E8A7A':'var(--color-background-primary)';update();
+}
+function onH(){T=+document.getElementById('sH').value;document.getElementById('lblH').textContent=T;update();}
+function onAmt(){
+  const v=parseFloat(document.getElementById('amtIn').value)||0;amount=Math.max(0,v);
+  document.getElementById('amtFmt').textContent=Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' kr.';update();
+}
+function onThresh(){
+  thresholds=[
+    Math.max(.001,Math.min(.499,(parseFloat(document.getElementById('t1').value)||7.5)/100)),
+    Math.max(.001,Math.min(.499,(parseFloat(document.getElementById('t2').value)||10)/100)),
+    Math.max(.001,Math.min(.499,(parseFloat(document.getElementById('t3').value)||15)/100))
+  ];update();
+}
+function setScenario(s){
+  sc=s;
+  document.getElementById('btnH').className='tbtn'+(s==='hist'?' on':'');
+  document.getElementById('btnC').className='tbtn'+(s==='cons'?' on':'');
+  const f=F[s];
+  ['dmu1','dmu2','dmu3'].forEach((id,i)=>document.getElementById(id).textContent=(f[i].mu*100).toFixed(1)+'%');
+  ['dsig1','dsig2','dsig3'].forEach((id,i)=>document.getElementById(id).textContent=(f[i].sig*100).toFixed(1)+'%');
+  document.getElementById('noteEl').innerHTML=s==='hist'
+    ?'<strong>Historisk scenarie:</strong> DI Teknologi &amp; MSCI World: 10-&aring;rige n&oslash;gletal. EU Financials: 10-&aring;rige MSCI Europe Financials 20/35 Capped — &mu;=11,70%, &sigma;=19,85% (MSCI maj 2026). Korrelationer: &rho;(Tech&harr;EU Fin)=0,45 · &rho;(Tech&harr;World)=0,80 · &rho;(EU Fin&harr;World)=0,70.'
+    :'<strong>Konservativt scenarie:</strong> DI Teknologi: 13%, EU Financials: 8%, MSCI World: 7%. Volatilitet u&aelig;ndret.';
+  update();
+}
+setScenario('hist');
+</script>
